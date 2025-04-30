@@ -29,7 +29,7 @@ class EventSeeder extends Seeder
             [
                 'name' => 'Marché de Noël à Dakar',
                 'description' => 'Le marché de Noël annuel de Dakar avec des artisans locaux et des produits traditionnels.',
-                'image' => asset('images/event2.jpeg'),
+                'image' => asset('images/event2.jpg'),
                 'price' => 5.00,
                 'country' => 'Sénégal',
                 'address' => 'Place de l’Indépendance, Dakar, Sénégal',
