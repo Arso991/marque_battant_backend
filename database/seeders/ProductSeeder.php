@@ -28,10 +28,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['L', 'XL']),
                 'color' => 'Noir',
                 'quantity' => 100,
-                'main_image' => 'http://127.0.0.1:8000/images/th1.jpg',
+                'main_image' => asset('images/th1.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/th2.jpg',
-                    'http://127.0.0.1:8000/images/th11.jpg'
+                    asset('images/th2.jpg'),
+                    asset('images/th11.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Homme')->first()->id,
@@ -44,11 +44,11 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['unique']),
                 'color' => 'Noir',
                 'quantity' => 50,
-                'main_image' => 'http://127.0.0.1:8000/images/ca1.jpg',
+                'main_image' => asset('images/ca1.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/ca2.jpg',
-                    'http://127.0.0.1:8000/images/ca3.jpg',
-                    'http://127.0.0.1:8000/images/ca4.jpg'
+                    asset('images/ca2.jpg'),
+                    asset('images/ca3.jpg'),
+                    asset('images/ca4.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Homme')->first()->id,
@@ -61,10 +61,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['M', 'L']),
                 'color' => 'Noir',
                 'quantity' => 70,
-                'main_image' => 'http://127.0.0.1:8000/images/p1.jpg',
+                'main_image' => asset('images/p1.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/p2.jpg',
-                    'http://127.0.0.1:8000/images/p3.jpg'
+                    asset('images/p2.jpg'),
+                    asset('images/p3.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Homme')->first()->id,
@@ -77,10 +77,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['L', 'XL']),
                 'color' => 'Belge',
                 'quantity' => 90,
-                'main_image' => 'http://127.0.0.1:8000/images/th6.jpg',
+                'main_image' => asset('images/th6.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/th7.jpg',
-                    'http://127.0.0.1:8000/images/th8.jpg'
+                    asset('images/th7.jpg'),
+                    asset('images/th8.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Homme')->first()->id,
@@ -95,10 +95,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['S', 'M']),
                 'color' => 'Blanc',
                 'quantity' => 80,
-                'main_image' => 'http://127.0.0.1:8000/images/th3.jpg',
+                'main_image' => asset('images/th3.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/th4.jpg',
-                    'http://127.0.0.1:8000/images/th5.jpg'
+                    asset('images/th4.jpg'),
+                    asset('images/th5.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Femme')->first()->id,
@@ -111,10 +111,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['S', 'M', 'L']),
                 'color' => 'Blanc',
                 'quantity' => 60,
-                'main_image' => 'http://127.0.0.1:8000/images/th9.jpg',
+                'main_image' => asset('images/th9.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/th10.jpg',
-                    'http://127.0.0.1:8000/images/th11.jpg'
+                    asset('images/th10.jpg'),
+                    asset('images/th11.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Femme')->first()->id,
@@ -127,10 +127,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['M', 'L']),
                 'color' => 'Belge',
                 'quantity' => 40,
-                'main_image' => 'http://127.0.0.1:8000/images/cu1.jpg',
+                'main_image' => asset('images/cu1.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/cu2.jpg',
-                    'http://127.0.0.1:8000/images/cu3.jpg'
+                    asset('images/cu2.jpg'),
+                    asset('images/cu3.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Femme')->first()->id,
@@ -143,10 +143,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['M', 'L']),
                 'color' => 'Belge',
                 'quantity' => 120,
-                'main_image' => 'http://127.0.0.1:8000/images/po1.jpg',
+                'main_image' => asset('images/po1.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/po2.jpg',
-                    'http://127.0.0.1:8000/images/po3.jpg'
+                    asset('images/po2.jpg'),
+                    asset('images/po3.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Femme')->first()->id,
@@ -161,10 +161,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['unique']),
                 'color' => 'Blanc',
                 'quantity' => 30,
-                'main_image' => 'http://127.0.0.1:8000/images/ta1.jpg',
+                'main_image' => asset('images/ta1.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/ta2.jpg',
-                    'http://127.0.0.1:8000/images/ta3.jpg'
+                    asset('images/ta2.jpg'),
+                    asset('images/ta3.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Accessoires')->first()->id,
@@ -177,11 +177,11 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['unique']),
                 'color' => 'Blanc',
                 'quantity' => 30,
-                'main_image' => 'http://127.0.0.1:8000/images/ta4.jpg',
+                'main_image' => asset('images/ta4.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/ta5.jpg',
-                    'http://127.0.0.1:8000/images/ta6.jpg',
-                    'http://127.0.0.1:8000/images/ta6.jpg'
+                    asset('images/ta5.jpg'),
+                    asset('images/ta6.jpg'),
+                    asset('images/ta6.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Accessoires')->first()->id,
@@ -194,10 +194,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['unique']),
                 'color' => 'Belge',
                 'quantity' => 200,
-                'main_image' => 'http://127.0.0.1:8000/images/t1.jpg',
+                'main_image' => asset('images/t1.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/t2.jpg',
-                    'http://127.0.0.1:8000/images/t3.jpg'
+                    asset('images/t2.jpg'),
+                    asset('images/t3.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Accessoires')->first()->id,
@@ -210,10 +210,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['unique']),
                 'color' => 'Belge',
                 'quantity' => 200,
-                'main_image' => 'http://127.0.0.1:8000/images/t4.jpg',
+                'main_image' => asset('images/t4.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/t5.jpg',
-                    'http://127.0.0.1:8000/images/t1.jpg'
+                    asset('images/t5.jpg'),
+                    asset('images/t1.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Accessoires')->first()->id,
@@ -226,11 +226,11 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['unique']),
                 'color' => 'Noir',
                 'quantity' => 50,
-                'main_image' => 'http://127.0.0.1:8000/images/bo1.jpg',
+                'main_image' => asset('images/bo1.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/bo2.jpg',
-                    'http://127.0.0.1:8000/images/bo3.jpg',
-                    'http://127.0.0.1:8000/images/bo4.jpg'
+                    asset('images/bo2.jpg'),
+                    asset('images/bo3.jpg'),
+                    asset('images/bo4.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Accessoires')->first()->id,
@@ -243,11 +243,11 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['unique']),
                 'color' => 'Belge',
                 'quantity' => 30,
-                'main_image' => 'http://127.0.0.1:8000/images/a2.jpg',
+                'main_image' => asset('images/a2.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/a3.jpg',
-                    'http://127.0.0.1:8000/images/a4.jpg',
-                    'http://127.0.0.1:8000/images/a5.jpg'
+                    asset('images/a3.jpg'),
+                    asset('images/a4.jpg'),
+                    asset('images/a5.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Accessoires')->first()->id,
@@ -260,10 +260,10 @@ class ProductSeeder extends Seeder
                 'size' => json_encode(['unique']),
                 'color' => 'Belge',
                 'quantity' => 30,
-                'main_image' => 'http://127.0.0.1:8000/images/a6.jpg',
+                'main_image' => asset('images/a6.jpg'),
                 'additional_images' => json_encode([
-                    'http://127.0.0.1:8000/images/a7.jpg',
-                    'http://127.0.0.1:8000/images/a8.jpg'
+                    asset('images/a7.jpg'),
+                    asset('images/a8.jpg')
                 ]),
                 'status' => '1',
                 'category_id' => $categories->where('name', 'Accessoires')->first()->id,

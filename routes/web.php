@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/run-setup', function () {
-    Artisan::call('migrate', ['--force' => true]);
+    Artisan::call('migrate:fresh', ['--force' => true]);
     Artisan::call('db:seed', ['--force' => true]);
     Artisan::call('config:cache');
     Artisan::call('route:cache');

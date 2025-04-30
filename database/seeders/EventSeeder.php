@@ -19,7 +19,7 @@ class EventSeeder extends Seeder
             [
                 'name' => 'Festival de musique d’Abidjan',
                 'description' => 'Un grand festival de musique avec des artistes internationaux et locaux.',
-                'image' => 'http://127.0.0.1:8000/images/event1.jpeg',
+                'image' => asset('images/event1.jpeg'),
                 'price' => 25.00,
                 'country' => 'Côte d\'Ivoire',
                 'address' => 'Palais des Congrès, Abidjan, Côte d\'Ivoire',
@@ -29,7 +29,7 @@ class EventSeeder extends Seeder
             [
                 'name' => 'Marché de Noël à Dakar',
                 'description' => 'Le marché de Noël annuel de Dakar avec des artisans locaux et des produits traditionnels.',
-                'image' => 'http://127.0.0.1:8000/images/event2.jpeg',
+                'image' => asset('images/event2.jpeg'),
                 'price' => 5.00,
                 'country' => 'Sénégal',
                 'address' => 'Place de l’Indépendance, Dakar, Sénégal',
@@ -39,7 +39,7 @@ class EventSeeder extends Seeder
             [
                 'name' => 'Festival du Film de Lomé',
                 'description' => 'Festival international du film à Lomé, mettant en avant des productions africaines.',
-                'image' => 'http://127.0.0.1:8000/images/event3.jpeg',
+                'image' => asset('images/event3.jpeg'),
                 'price' => 15.00,
                 'country' => 'Togo',
                 'address' => 'Centre Culturel Français, Lomé, Togo',
@@ -49,7 +49,7 @@ class EventSeeder extends Seeder
             [
                 'name' => 'Salon de l’Entrepreneuriat de Ouagadougou',
                 'description' => 'Un salon dédié aux jeunes entrepreneurs et aux opportunités d’affaires.',
-                'image' => 'http://127.0.0.1:8000/images/event4.jpeg',
+                'image' => asset('images/event4.jpeg'),
                 'price' => 20.00,
                 'country' => 'Burkina Faso',
                 'address' => 'Hotel Azalai, Ouagadougou, Burkina Faso',
@@ -59,7 +59,7 @@ class EventSeeder extends Seeder
             [
                 'name' => 'Carnaval de Banjul',
                 'description' => 'Le plus grand carnaval de la Gambie, une célébration de la culture locale.',
-                'image' => 'http://127.0.0.1:8000/images/event5.jpeg',
+                'image' => asset('images/event5.jpeg'),
                 'price' => 10.00,
                 'country' => 'Gambie',
                 'address' => 'Plage de Banjul, Banjul, Gambie',
@@ -69,7 +69,7 @@ class EventSeeder extends Seeder
             [
                 'name' => 'Festival de Danse de Conakry',
                 'description' => 'Un festival annuel de danse qui réunit des danseurs du monde entier.',
-                'image' => 'http://127.0.0.1:8000/images/event6.jpeg',
+                'image' => asset('images/event6.jpeg'),
                 'price' => 12.00,
                 'country' => 'Guinée',
                 'address' => 'Centre Culturel Franco-Guinéen, Conakry, Guinée',

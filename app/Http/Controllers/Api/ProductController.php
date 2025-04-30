@@ -135,8 +135,8 @@ class ProductController extends Controller
 
             if ($request->hasFile('imageUrl')) {
                 foreach ($request->file('imageUrl') as $image) {
-                    $path = $image->store('pictures');
-                    $images[] = $path;
+                    $path = $image->store('products', 'public');
+                    $images[] = asset('storage/' . $path);
                 }
             }
 

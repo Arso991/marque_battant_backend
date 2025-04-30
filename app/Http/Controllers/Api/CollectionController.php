@@ -32,12 +32,12 @@ class CollectionController extends Controller
             $image = null;
 
             if ($request->hasFile('image')) {
-                $image = $request->file('image')->store('pictures');
+                $image = $request->file('image')->store('collections', 'public');
             }
             // Création de la collection
             $collection = Collection::create([
                 "name" => $request['name'],
-                "image" => $image,
+                "image" => asset('storage/' . $image),
                 "description" => $request['description'],
             ]);
 
@@ -81,15 +81,15 @@ class CollectionController extends Controller
 
             $image = null;
             if ($request->hasFile('image')) {
-                if ($collection->image) {
-                    Storage::delete($collection->image);
+                if ($collection->image && Storage::exists('public/' . $collection->image)) {
+                    Storage::delete('public/' . $collection->image);
                 }
-                $image = $request->file('image')->store('pictures');
+                $image = $request->file('image')->store('collections', 'public');
             }
             // Mise à jour de la collection
             $collection->update([
                 "name" => $request['name'],
-                "image" => $image,
+                "image" => asset('storage/' . $image),
                 "description" => $request['description'],
             ]);
 
@@ -112,10 +112,13 @@ class CollectionController extends Controller
         try {
             //code...
             $collection = Collection::find($id);
+
             if (!$collection) {
                 return response()->json(['message' => 'Collection not found'], 404);
             }
+
             $collection->categories()->detach(); // Supprime les relations dans la table pivot
+
             $collection->delete(); // Supprime la collection
 
             return response()->json(['message' => 'Collection deleted'], 204);

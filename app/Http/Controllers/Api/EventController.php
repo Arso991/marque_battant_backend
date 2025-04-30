@@ -49,13 +49,13 @@ class EventController extends Controller
             $image = null;
 
             if ($request->hasFile('image')) {
-                $image = $request->file('image')->store('pictures');
+                $image = $request->file('image')->store('events', 'public');
             }
 
             $event = Event::create([
                 'name' => $request->name,
                 'description' => $request->description,
-                'image' => $image,
+                'image' => asset('storage/' . $image),
                 'price' => $request->price,
                 'country' => $request->country,
                 'address' => $request->address,
@@ -82,16 +82,17 @@ class EventController extends Controller
             $image = null;
 
             if ($request->hasFile('image')) {
-                if ($event->image) {
-                    Storage::delete($event->image);
+                if ($event->image && Storage::exists('public/' . $event->image)) {
+                    Storage::delete('public/' . $event->image);
                 }
-                $image = $request->file('image')->store('pictures');
+
+                $image = $request->file('image')->store('events', 'public');
             }
 
             $event->update([
                 'name' => $request->name,
                 'description' => $request->description,
-                'image' => $image,
+                'image' => asset('storage/' . $image),
                 'price' => $request->price,
                 'country' => $request->country,
                 'address' => $request->address,
@@ -110,10 +111,13 @@ class EventController extends Controller
         try {
             //code...
             $event = Event::find($id);
+
             if (!$event) {
                 return response()->json(['message' => 'Event not found'], 404);
             }
+
             $event->delete();
+
             return response()->json(['message' => 'Event deleted'], 204);
         } catch (Exception $e) {
             //throw $th;
