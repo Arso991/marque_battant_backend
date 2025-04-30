@@ -17,10 +17,13 @@ class EventController extends Controller
         try {
             //code...
             $events = Event::all();
-            return response()->json(['data' => $events], 200);
+            return response()->json([
+                "success" => true,
+                'data' => $events
+            ], 200);
         } catch (Exception $e) {
             //throw $th;
-            return response()->json($e);
+            return response()->json(['message' => 'Erreur au niveau du serveur', 'error' => $e->getMessage()], 500);
         }
     }
 

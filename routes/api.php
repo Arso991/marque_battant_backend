@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CollectionController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\FavoriteController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\RolePermissionController;
@@ -33,9 +35,11 @@ Route::group([], function () {
 });
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('/register', [AuthController::class, 'register']);
     Route::get('/verify_mail/{id}/{hash}', [AuthController::class, 'verify'])->middleware(['signed'])->name('verifyEmail');
-    Route::post('/email/resend', [AuthController::class, 'emailResend'])->middleware(['auth:sanctum', 'throttle:4,1'])->name('resendEmail');;
+    Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/email/resend', [AuthController::class, 'emailResend'])->middleware(['auth:sanctum', 'throttle:4,1'])->name('resendEmail');
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/social-login', [AuthController::class, 'socialLogin']);
     Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
@@ -52,6 +56,8 @@ Route::group([], function () {
 
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/{id}', [ProductController::class, 'show']);
+    Route::get('/features-products/{id}', [ProductController::class, 'getFeaturesProducts']);
+    Route::get('/accessories', [ProductController::class, 'getAccessories']);
 
     Route::get('/events', [EventController::class, 'index']);
     Route::get('/events/{id}', [EventController::class, 'show']);
@@ -74,6 +80,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/events/{id}', [EventController::class, 'update']);
     Route::delete('/events/{id}', [EventController::class, 'delete']);
 
-    Route::post('/events/{event_id}/pay', [PaymentController::class, 'payEvent']);
-    Route::post('/events/payments/{payment_id}/confirm', [PaymentController::class, 'confirmPayment']);
+    Route::put('/update-informations', [AuthController::class, 'updateInfo']);
+    Route::post('/update-avatar', [AuthController::class, 'updateAvatar']);
+
+    //Orders
+    Route::post('/cart/save', [OrderController::class, 'store']);
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/orders/{id}', [OrderController::class, 'show']);
+
+    //Favorites
+    Route::post('/favorites/{productId}', [FavoriteController::class, 'toggleFavorite']);
+    Route::get('/favorites', [FavoriteController::class, 'getFavorites']);
+
+
+    //Route::post('/events/{event_id}/pay', [PaymentController::class, 'payEvent']);
+    //Route::post('/events/payments/{payment_id}/confirm', [PaymentController::class, 'confirmPayment']);
 });

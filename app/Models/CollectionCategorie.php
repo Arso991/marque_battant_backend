@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\GeneratesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class CollectionCategorie extends Pivot
 {
-    use HasFactory;
+    use HasFactory, GeneratesUuid;
 
-    protected $table = ['collection_categories'];
-
-    protected $fillable = ['collection_id', 'category_id', 'start_date', 'end_date'];
+    protected $fillable = [
+        'collection_id',
+        'category_id',
+        'start_date',
+        'end_date'
+    ];
 }

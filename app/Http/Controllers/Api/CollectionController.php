@@ -14,11 +14,14 @@ class CollectionController extends Controller
     public function index()
     {
         try {
-            $collections = Collection::with('categories')->get();
+            $collections = Collection::where('image', '!=', null)->with(['categories.products'])->limit(4)->get();
 
-            return response()->json(['data' => $collections], 200);
+            return response()->json([
+                "success" => true,
+                'data' => $collections
+            ], 200);
         } catch (Exception $e) {
-            return response()->json($e);
+            return response()->json(['message' => 'Erreur au niveau du serveur', 'error' => $e->getMessage()], 500);
         }
     }
 

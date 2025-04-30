@@ -2,15 +2,22 @@
 
 namespace App\Models;
 
+use App\Traits\GeneratesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Collection extends Model
 {
-    use HasFactory;
+    use HasFactory, GeneratesUuid;
 
-    protected $fillable = ['name', 'image', 'description', 'start_date', 'end_date'];
+    protected $fillable = [
+        'name',
+        'image',
+        'description',
+        'start_date',
+        'end_date'
+    ];
 
     protected static function boot()
     {

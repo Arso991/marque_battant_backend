@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Models\Category;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,15 +13,95 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
         try {
-            //code...
-            $products = Product::all();
-            return response()->json(['data' => $products], 200);
-        } catch (Exception $e) {
-            //throw $th;
-            return response()->json($e);
+
+            $query = Product::query();
+
+            // Filtrer par nom
+            if ($request->filled('name')) {
+                $query->where('name', 'LIKE', '%' . $request->name . '%');
+            }
+
+            // Filtrer par catégorie
+            if ($request->filled('category') && $request->category !== "tous") {
+                $category = Category::where('name', 'LIKE', '%' . $request->category . '%')->first();
+
+                $query->where('category_id', $category->id);
+            }
+
+            // Filtrer par taille
+            if ($request->filled('size') && $request->size !== null && $request->size !== "tous") {
+                $query->where('size', 'LIKE', '%' . $request->size . '%');
+            }
+
+            // Filtrer par couleur
+            if ($request->filled('color')) {
+                $query->where('color', 'LIKE', '%' . $request->color . '%');
+            }
+
+            // Filtrer par statut
+            if ($request->filled('status')) {
+                $query->where('status', $request->status);
+            }
+
+            // Filtrer par catégorie
+            if ($request->filled('category_id')) {
+                $query->where('category_id', $request->category_id);
+            }
+
+            // Filtrer par collection
+            if ($request->filled('collection_id')) {
+                $query->where('collection_id', $request->collection_id);
+            }
+
+            // Tri par prix (croissant ou décroissant)
+            if ($request->filled('sort_price')) {
+                $sortOrder = $request->sort_price === 'asc' ? 'asc' : 'desc';
+                $query->orderBy('price', $sortOrder);
+            }
+
+            $products = $query->with('categorie')->get();
+
+            return response()->json([
+                "success" => true,
+                'data' => $products
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erreur au niveau du serveur', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getFeaturesProducts($id)
+    {
+        try {
+            $product = Product::find($id);
+
+            $featuresProduct = Product::where('category_id', $product->category_id)->where('id', '!=', $product->id)->limit(4)->get();
+
+            return response()->json([
+                "success" => true,
+                'data' => $featuresProduct
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erreur au niveau du serveur', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getAccessories()
+    {
+        try {
+            $category = Category::where('name', 'Accessoires')->first();
+
+            $accessories = Product::where('category_id', $category->id)->inRandomOrder()->take(4)->get();
+
+            return response()->json([
+                "success" => true,
+                'data' => $accessories
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erreur au niveau du serveur', 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -29,13 +110,20 @@ class ProductController extends Controller
         try {
             //code...
             $product = Product::find($id);
+
             if (!$product) {
-                return response()->json(['message' => 'Product not found'], 404);
+                return response()->json([
+                    "success" => false,
+                    'message' => 'Product non disponible'
+                ], 404);
             }
-            return response()->json(['data' => $product], 200);
-        } catch (Exception $e) {
-            //throw $th;
-            return response()->json($e);
+
+            return response()->json([
+                "success" => true,
+                'data' => $product
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erreur au niveau du serveur', 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -66,10 +154,9 @@ class ProductController extends Controller
                 'category_id' => $request->category_id,
             ]);
 
-            return response()->json(['data' => $product, 'message' => 'Product succesfully added'], 201);
+            return response()->json(['data' => $product, 'message' => 'Product ajouté avec succès.'], 201);
         } catch (Exception $e) {
-            //throw $th;
-            return response()->json($e);
+            return response()->json(['message' => 'Erreur au niveau du serveur', 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -80,7 +167,7 @@ class ProductController extends Controller
             //dd($request->all());
             $product = Product::find($id);
             if (!$product) {
-                return response()->json(['message' => 'Product not found'], 404);
+                return response()->json(['message' => 'Product non disponible'], 404);
             }
 
             $images = $product->images ?? [];
@@ -105,9 +192,9 @@ class ProductController extends Controller
                 'stock' => $request->stock,
                 'category_id' => $request->category_id,
             ]);
-            return response()->json(['data' => $product, 'message' => 'Product succesfully updated'], 200);
+            return response()->json(['data' => $product, 'message' => 'Product mis à jour avec succès.'], 200);
         } catch (Exception $e) {
-            return response()->json($e);
+            return response()->json(['message' => 'Erreur au niveau du serveur', 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -117,13 +204,14 @@ class ProductController extends Controller
             //code...
             $product = Product::find($id);
             if (!$product) {
-                return response()->json(['message' => 'Collection not found'], 404);
+                return response()->json(['message' => 'Produit non disponoble.'], 404);
             }
 
             $product->delete(); // Supprime le produit
-            return response()->json(['message' => 'Product deleted'], 204);
+
+            return response()->json(['message' => 'Product supprimé avec succès.'], 204);
         } catch (Exception $e) {
-            return response()->json($e);
+            return response()->json(['message' => 'Erreur au niveau du serveur', 'error' => $e->getMessage()], 500);
         }
     }
 }

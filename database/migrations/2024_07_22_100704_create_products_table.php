@@ -12,16 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->string('name'); // Nom du produit
-            $table->text('description')->nullable(); // Description du produit, nullable pour permettre des valeurs nulles
-            $table->decimal('price', 8, 2); // Prix du produit avec 8 chiffres au total et 2 chiffres après la virgule
-            $table->json('size')->nullable(); // Ensemble des tailles disponibles, stocké sous forme de JSON
-            $table->json('color')->nullable(); // Couleur du produit, nullable
-            $table->integer('quantity')->default(0); // Quantité du produit, valeur par défaut 0
-            $table->json('imageUrl')->nullable(); // URL des images du produit, stocké sous forme de JSON
-            $table->boolean('stock')->default(true); // Disponibilité du produit, valeur par défaut true (disponible)
-            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->decimal('price', 8, 2);
+            $table->json('size')->nullable();
+            $table->string('color')->nullable();
+            $table->integer('quantity')->default(0);
+            $table->string('main_image')->nullable();
+            $table->json('additional_images')->nullable();
+            $table->enum('status', ['0', '1', '2'])->default('1');
+            $table->uuid('category_id');
+            $table->uuid('collection_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('collection_id')->references('id')->on('collections')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

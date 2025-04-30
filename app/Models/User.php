@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Notifications\VerifyEmail;
+use App\Traits\GeneratesUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, GeneratesUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +28,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'birthday',
         'password',
+        'phone',
+        'address',
+        'city',
+        'avatar',
         'email_verified',
         'email_verified_at',
         'provider',
@@ -57,6 +62,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function events()
     {
         return $this->belongsToMany(Event::class);
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Product::class, 'favorites', 'user_id', 'product_id');
     }
 
     public function sendEmailVerificationNotification()

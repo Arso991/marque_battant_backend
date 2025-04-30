@@ -39,7 +39,7 @@ class RegisterRequest extends FormRequest
             'success' => false,
             'error' => true,
             'message' => 'Validation errors',
-            'errors' => $validator->errors()
+            'errors' => $validator->errors()->first(),
         ], 422));
     }
 }
